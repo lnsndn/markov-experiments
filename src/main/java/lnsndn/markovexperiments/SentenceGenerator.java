@@ -2,22 +2,20 @@ package lnsndn.markovexperiments;
 
 import lnsndn.markovexperiments.data.DataReader;
 
-import java.util.List;
 
-
-class SentenceGenerator {
+public class SentenceGenerator {
 
   private final String START_WORD_1 = "BEGIN";
   private final String START_WORD_2 = "HERE";
   private final String STOP_WORD = "END";
   private WordCombos wordCombos = new WordCombos();
 
-  SentenceGenerator(DataReader reader) {
+  public SentenceGenerator(DataReader reader) {
     // Not thread safe!
     reader.getLines().forEach(wordCombos::addCombosFromString);
   }
 
-  String generateSentence() {
+  public String generateSentence() {
     return generate(START_WORD_1, START_WORD_2, "");
   }
 
@@ -27,7 +25,7 @@ class SentenceGenerator {
     }
     final String nextWord = wordCombos.generateFollowingWord(word1, word2);
     if(nextWord.equals(STOP_WORD)) {
-      return sentence;
+      return sentence.trim();
     }
     return generate(word2, nextWord, sentence + nextWord + " ");
   }

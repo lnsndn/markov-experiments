@@ -29,11 +29,11 @@ class BrideSpider(SitemapSpider):
     def parse_script_text(self, script_text):
         article = json.loads(script_text)
         body = article['articleBody']
-        #the order below is important, [#iframe: ...] goes away before links are turned ito text
-        body = re.sub(r'\[#[^:]*:[^\]]*\]', '', body) # md images,instagrams, etc are [#stuff: morestuff], it all dies
-        body = re.sub(r'\[([^\]]+)\]\([^\)]*\)(\{.*\})?', r'\1', body) # markdown links are [stuff](link){optional}, we keep the stuff
-        body = re.sub(r'__.*__', r'\\n\\n', body) # md __headings__ die
-        body = re.sub(r'[|*]*', '', body) # some gly chars we don't like
+        #the order below is important, [#iframe: ...] goes away before links are turned into text
+        body = re.sub(r'\[#[^:]*:[^\]]*\]', '', body) # md images,instagrams, etc are [#stuff: morestuff], not needed
+        body = re.sub(r'\[([^\]]+)\]\([^\)]*\)(\{.*\})?', r'\1', body) # markdown links are [stuff](link){optional}, keep
+        body = re.sub(r'__.*__', r'\\n\\n', body) # md __headings__ not needed
+        body = re.sub(r'[|*]*', '', body) # some ugly chars we don't want
         body = re.sub(r'\\n#+.*?\\n', r'\\n\\n', body) # headings removed
         body = re.sub(r'\(\d+x\d+\)', '', body) # remove (610x344) type junk
         lines = []
@@ -42,5 +42,5 @@ class BrideSpider(SitemapSpider):
             line = re.sub(r'\\','', line)
             if not re.match(r'^\s*$', line):
                 lines.append(line)
-        body = '\n'.join([u'BEGIN HERE %s END'%x for x in lines])
+        body = '\n'.join([u'BEGIN HERE %s END' % x for x in lines])
         return body

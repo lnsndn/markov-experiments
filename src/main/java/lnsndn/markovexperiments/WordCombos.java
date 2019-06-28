@@ -25,7 +25,7 @@ class WordCombos {
         // Not thread safe if called in parallel!
         // Consider using ConcurrentHashMap or Lombok @Synchronized and so on if need arises
         final List<String> splitWords = Arrays.asList(str.split(" "));
-        for(int i = 0; i < splitWords.size() - 3; i++) {
+        for(int i = 0; i < splitWords.size() - 2; i++) {
             // TODO: clean words, remove special characters, convert to lower case etc
             final Pair<String, String> wordCombo = Pair.of(splitWords.get(i), splitWords.get(i + 1));
             final String nextWord = splitWords.get(i + 2);

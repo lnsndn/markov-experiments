@@ -53,6 +53,10 @@ Most output is brain-hemmorhage-inducing nonsence, but sometimes you will get so
 
 ## Improvement areas
 
-* Needs testing
+* Testing random functions is hard. In order to deeply test the algorithm, one needs to unit test the `WordCombos` class 
+piece by piece, e.g. test for verifying the inner structures contain what they should contain. 
+It is not stable to write tests for random functions without rewriting them to become deterministic, 
+but then the whole point is lost.
+* Update the python scraping part to 1) work with the current version of brides.com, 2) use a modern version of scrapy and Python 3
 * Consider parallelization for very large datasets, watch out for some non-thread-safe parts of the code though
 * Experiment with cleaning the words in various ways

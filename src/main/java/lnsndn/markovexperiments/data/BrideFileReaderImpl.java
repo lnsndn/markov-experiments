@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrideReader implements DataReader {
+public class BrideFileReaderImpl implements DataReader {
 
     @Getter(lazy = true)
     private final List<String> lines = readLines();
