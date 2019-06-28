@@ -24,6 +24,10 @@ public class TextGenerator {
     buildDictionary();
   }
 
+  /**
+   * If large enough, splits up the input data into chunks and builds the dictionary of word combinations
+   * in parallel. Otherwise just builds it in one thread.
+   */
   private void buildDictionary() {
     final List<String> lines = reader.getLines();
     int poolSize = 1;
