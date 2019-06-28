@@ -1,7 +1,7 @@
 package lnsndn.markovexepriments;
 
 import junit.framework.TestCase;
-import lnsndn.markovexperiments.SentenceGenerator;
+import lnsndn.markovexperiments.TextGenerator;
 import lnsndn.markovexperiments.data.DataReader;
 
 import java.util.Arrays;
@@ -9,15 +9,15 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class TestSentenceGenerator extends TestCase {
+public class TestTextGenerator extends TestCase {
 
     public void testHappyPathEvenNumberOfWords() {
         List<String> lines = Arrays.asList("BEGIN HERE this is a test END");
         DataReader reader = mock(DataReader.class);
         when(reader.getLines()).thenReturn(lines);
 
-        SentenceGenerator generator = new SentenceGenerator(reader);
-        assertEquals("this is a test", generator.generateSentence());
+        TextGenerator generator = new TextGenerator(reader);
+        assertEquals("this is a test", generator.generate());
     }
 
     public void testHappyPathOddNumberOfWords() {
@@ -25,8 +25,8 @@ public class TestSentenceGenerator extends TestCase {
         DataReader reader = mock(DataReader.class);
         when(reader.getLines()).thenReturn(lines);
 
-        SentenceGenerator generator = new SentenceGenerator(reader);
-        assertEquals("this is also a test", generator.generateSentence());
+        TextGenerator generator = new TextGenerator(reader);
+        assertEquals("this is also a test", generator.generate());
     }
 
     public void testEmptyLine() {
@@ -34,8 +34,8 @@ public class TestSentenceGenerator extends TestCase {
         DataReader reader = mock(DataReader.class);
         when(reader.getLines()).thenReturn(lines);
 
-        SentenceGenerator generator = new SentenceGenerator(reader);
-        assertEquals("", generator.generateSentence());
+        TextGenerator generator = new TextGenerator(reader);
+        assertEquals("", generator.generate());
     }
 
     public void testLineMissingStartAndStop() {
@@ -43,7 +43,7 @@ public class TestSentenceGenerator extends TestCase {
         DataReader reader = mock(DataReader.class);
         when(reader.getLines()).thenReturn(lines);
 
-        SentenceGenerator generator = new SentenceGenerator(reader);
-        assertEquals("", generator.generateSentence());
+        TextGenerator generator = new TextGenerator(reader);
+        assertEquals("", generator.generate());
     }
 }
