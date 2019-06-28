@@ -60,3 +60,5 @@ but then the whole point is lost.
 * Update the python scraping part to 1) work with the current version of brides.com, 2) use a modern version of scrapy and Python 3
 * Consider parallelization for very large datasets, watch out for some non-thread-safe parts of the code though
 * Experiment with cleaning the words in various ways
+* Most output is nonsense. To fix it the algorithm needs to become more refined and complex, for example by 
+looking at triples of words (this works better with more data than we have though).
