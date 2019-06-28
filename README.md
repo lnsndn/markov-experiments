@@ -42,7 +42,7 @@ Then run the java main part which will print the resulting sentence.
 mvn exec:java
 ```
 
-## Example output
+#### Example output
 
 Most output is brain-hemmorhage-inducing nonsence, but sometimes you will get something like this (from actual runs):
 
@@ -50,3 +50,9 @@ Most output is brain-hemmorhage-inducing nonsence, but sometimes you will get so
 * _The upcoming John Legend-produced historical rom-com about Barack and Michelle will have to work a lace handkerchief and butterfly pin that belonged to Genevieve's great, great grandmother._
 * _No matter how much you painstakingly plan, animals tend to start talking about your soon-to-be husband._
 * _Blake was down on one knee... Yes, you heard correctly. Llamas. The day of my life._
+
+## Improvement areas
+
+* Needs testing
+* Consider parallelization for very large datasets, watch out for some non-thread-safe parts of the code though
+* Experiment with cleaning the words in various ways
