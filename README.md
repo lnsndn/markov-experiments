@@ -1,15 +1,33 @@
 # markov-experiments
 
-A project that has two separate parts: 
+A simple generator of bridal article content, using web scraping and markov chains.
+
+## Functionality
+
+The project has two separate parts: 
 
 1) python scrapy script scraping brides.com articles for text (see the python scrapy documentation)
-2) a java app for generating very rudimentary markov chains of bridal nonsense
+2) a java app for generating rudimentary markov chains of bridal nonsense
+
+The basic functionality of the markov chain generation:
+
+- An input file contains lines of text starting with "BEGIN HERE" and ending with "END", sourced via the scraping script
+- Go through word by word and store each word combo (for example "their" and "ceremony") as a unique key, and the third following word in an array, for example:
+```
+their, ceremony: [was, came, never, was]
+Mike, took: [notes, the, the, his, the]
+```
+- Naturally, the "BEGIN HERE" combo will be followed by all possible starting words, so start building a sentence by randomizing a first word from its array
+- Let's say the random word was "The", next do the same thing for "HERE The"
+- Continue until you reach the word "END"
+- Probability will have made sure you ended up with combinations that were more likely to occur together
 
 ## Usage
 
-Run the scrapy python script, place contents in the java resources folder. 
-(Not sure if this part actually works anymore though, it's been a while).
+Run the scrapy python script. 
+(Not sure if this part actually works anymore though, brides.com has probably changed layout since the script was written).
 ```
+pip install -r requirements.txt
 scrapy runspider bridespider.py
 ```
 Then run the java main method which will print the resulting sentence.

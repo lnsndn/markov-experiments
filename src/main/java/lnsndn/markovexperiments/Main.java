@@ -1,30 +1,18 @@
 package lnsndn.markovexperiments;
 
+import lnsndn.markovexperiments.data.BrideReader;
+
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-  public static void main(String[] args){
-    final SentenceGenerator generator = new SentenceGenerator(readFile("src/main/resources/brides.txt"));
+  public static void main(String[] args) {
+    final SentenceGenerator generator = new SentenceGenerator(new BrideReader());
     System.out.println(generator.generateSentence());
-  }
-
-  private static List<String> readFile(String filename) {
-    List<String> records = new ArrayList<>();
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(filename));
-      String line;
-      while ((line = reader.readLine()) != null) {
-        records.add(line);
-      }
-      reader.close();
-      return records;
-    }
-    catch (Exception e) {
-      throw new RuntimeException(e);
-    }
   }
 }

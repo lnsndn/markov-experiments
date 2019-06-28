@@ -22,9 +22,11 @@ class WordCombos {
     }
 
     void addCombosFromString(final String str) {
+        // Not thread safe if called in parallel!
+        // Consider using ConcurrentHashMap or Lombok @Synchronized and so on if need arises
         final List<String> splitWords = Arrays.asList(str.split(" "));
         for(int i = 0; i < splitWords.size() - 3; i++) {
-            // TODO: cleaning words, remove special characters, convert to lower case etc
+            // TODO: clean words, remove special characters, convert to lower case etc
             final Pair<String, String> wordCombo = Pair.of(splitWords.get(i), splitWords.get(i + 1));
             final String nextWord = splitWords.get(i + 2);
             words.computeIfAbsent(wordCombo, w -> new ArrayList<>()).add(nextWord);

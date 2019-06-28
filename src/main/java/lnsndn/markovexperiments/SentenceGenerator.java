@@ -1,5 +1,7 @@
 package lnsndn.markovexperiments;
 
+import lnsndn.markovexperiments.data.DataReader;
+
 import java.util.List;
 
 
@@ -10,9 +12,9 @@ class SentenceGenerator {
   private final String STOP_WORD = "END";
   private WordCombos wordCombos = new WordCombos();
 
-  SentenceGenerator(List<String> lines) {
+  SentenceGenerator(DataReader reader) {
     // Not thread safe!
-    lines.forEach(wordCombos::addCombosFromString);
+    reader.getLines().forEach(wordCombos::addCombosFromString);
   }
 
   String generateSentence() {
