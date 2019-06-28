@@ -8,6 +8,20 @@ A simple generator of bridal article content, using web scraping and markov chai
 * Java 1.8
 * Maven
 
+## Usage
+
+Run the scrapy python script. 
+(Not sure if this part actually works anymore though, brides.com has probably changed layout since the script was written).
+```
+pip install -r requirements.txt
+scrapy runspider bridespider.py
+```
+Then run the java main part which will print the resulting sentence.
+
+```
+mvn exec:java
+```
+
 ## Functionality
 
 The project has two separate parts: 
@@ -27,20 +41,6 @@ Mike, took: [notes, the, the, his, the]
 - Let's say the random word was "The", next do the same thing for "HERE The"
 - Continue until you reach the word "END"
 - Probability will have made sure you ended up with combinations that were more likely to occur together
-
-## Usage
-
-Run the scrapy python script. 
-(Not sure if this part actually works anymore though, brides.com has probably changed layout since the script was written).
-```
-pip install -r requirements.txt
-scrapy runspider bridespider.py
-```
-Then run the java main part which will print the resulting sentence.
-
-```
-mvn exec:java
-```
 
 #### Example output
 
