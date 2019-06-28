@@ -15,6 +15,7 @@ public class TextGenerator {
   private final String START_WORD_2 = "HERE";
   private final String STOP_WORD = "END";
   private final int MAX_POOL_SIZE = 10; // should really be number of CPUs-1
+  private final int MAX_THREAD_CHUNK_SIZE = 1000; // size of input data above which we invoke parallelization (arbitrary number)
   private Dictionary dictionary = new Dictionary();
   private DataReader reader;
 
@@ -25,14 +26,9 @@ public class TextGenerator {
 
   private void buildDictionary() {
     final List<String> lines = reader.getLines();
-    final int maxChunkSize = lines.size() / MAX_POOL_SIZE;
     int poolSize = 1;
 
-    if (lines.size() > maxChunkSize) {
-      while (poolSize < MAX_POOL_SIZE && poolSize * maxChunkSize < lines.size()) {
-        poolSize++;
-      }
-    }
+    poolSize = Math.min(MAX_POOL_SIZE, 1 + lines.size() / MAX_THREAD_CHUNK_SIZE);
     final int actualThreadChunkSize = lines.size() / poolSize;
     List<Callable<Boolean>> callables = new ArrayList<>();
 
