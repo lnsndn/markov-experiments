@@ -3,27 +3,27 @@ package lnsndn.markovexperiments;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 class WordCombos {
 
     // Represents a map of word tuples and all the words that have been encountered
     // following each particular tuple
-    private HashMap<Pair<String, String>, List<String>> words = new HashMap<>();
+    // TODO: will the inner list inherit the outer struct's concurrency?
+    private ConcurrentMap<Pair<String, String>, List<String>> words = new ConcurrentHashMap<>();
 
     Boolean exists(String word1, String word2) {
         return words.containsKey(Pair.of(word1, word2));
     }
 
     String generateFollowingWord(String word1, String word2) {
-        // Randomizes a word known to follow the string tuple combo
         Random random = new Random();
         final List<String> followingWords = words.get(Pair.of(word1, word2));
         return followingWords.get(random.nextInt(followingWords.size()));
     }
 
     void addCombosFromString(final String str) {
-        // Not thread safe if called in parallel!
-        // Consider using ConcurrentHashMap or Lombok @Synchronized and so on if need arises
         final List<String> splitWords = Arrays.asList(str.split(" "));
         for(int i = 0; i < splitWords.size() - 2; i++) {
             // TODO: clean words, remove special characters, convert to lower case etc

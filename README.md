@@ -11,7 +11,7 @@ A simple generator of bridal article content, using web scraping and markov chai
 ## Usage
 
 Run the scrapy python script. 
-(Not sure if this part actually works anymore though, brides.com has probably changed layout since the script was written).
+(Not sure if this part actually works anymore though, brides.com has probably changed layout since the script was written in 2016).
 ```
 pip install -r requirements.txt
 scrapy runspider bridespider.py
@@ -58,7 +58,7 @@ piece by piece, e.g. test for verifying the inner structures contain what they s
 It is not stable to write tests for random functions without rewriting them to become deterministic, 
 but then the whole point is lost.
 * Update the python scraping part to 1) work with the current version of brides.com, 2) use a modern version of scrapy and Python 3
-* Consider parallelization for very large datasets, watch out for some non-thread-safe parts of the code though
+* Consider more parallelization for very large datasets, e.g. don't read entire file into memory. Watch out for some non-thread-safe parts of the code though.
 * Experiment with cleaning the words in various ways
 * Most output is nonsense. To fix it the algorithm needs to become more refined and complex, for example by 
 looking at triples of words (this works better with more data than we have though).
