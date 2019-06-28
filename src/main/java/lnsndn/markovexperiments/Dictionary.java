@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-class WordCombos {
+class Dictionary {
 
     // Represents a map of word tuples and all the words that have been encountered
     // following each particular tuple

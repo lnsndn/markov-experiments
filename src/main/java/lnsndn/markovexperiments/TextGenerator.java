@@ -15,15 +15,15 @@ public class TextGenerator {
   private final String START_WORD_2 = "HERE";
   private final String STOP_WORD = "END";
   private final int MAX_POOL_SIZE = 10; // should really be number of CPUs-1
-  private WordCombos wordCombos = new WordCombos();
+  private Dictionary dictionary = new Dictionary();
   private DataReader reader;
 
   public TextGenerator(DataReader reader) {
     this.reader = reader;
-    buildWordCombos();
+    buildDictionary();
   }
 
-  private void buildWordCombos() {
+  private void buildDictionary() {
     final List<String> lines = reader.getLines();
     final int maxChunkSize = lines.size() / MAX_POOL_SIZE;
     int poolSize = 1;
@@ -41,7 +41,7 @@ public class TextGenerator {
       callables.add(() -> {
         lines
           .subList(finalI, Math.min(finalI + actualThreadChunkSize, lines.size()))
-          .forEach(wordCombos::addCombosFromString);
+          .forEach(dictionary::addCombosFromString);
         return true;
       });
     }
@@ -55,15 +55,14 @@ public class TextGenerator {
   }
 
   public String generate() {
-    wordCombos.printSize();
     return generate(START_WORD_1, START_WORD_2, "");
   }
 
   private String generate(String word1, String word2, String text) {
-    if(!wordCombos.exists(word1, word2)) {
+    if(!dictionary.exists(word1, word2)) {
       return text;
     }
-    final String nextWord = wordCombos.generateFollowingWord(word1, word2);
+    final String nextWord = dictionary.generateFollowingWord(word1, word2);
     if(nextWord.equals(STOP_WORD)) {
       return text.trim();
     }
