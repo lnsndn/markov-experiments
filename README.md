@@ -2,6 +2,12 @@
 
 A simple generator of bridal article content, using web scraping and markov chains.
 
+## Dependencies
+
+* Python 2.7
+* Java 1.8
+* Maven
+
 ## Functionality
 
 The project has two separate parts: 
@@ -30,7 +36,11 @@ Run the scrapy python script.
 pip install -r requirements.txt
 scrapy runspider bridespider.py
 ```
-Then run the java main method which will print the resulting sentence.
+Then run the java main part which will print the resulting sentence.
+
+```
+mvn exec:java
+```
 
 ## Example output
 
